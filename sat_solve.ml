@@ -5,6 +5,14 @@
 	 problème.  Ensuite on évalue la forme normale pour chacune de ces entrées, si l'une d'elle génère la valeur true
 	 alors le problème est satisfaisable, si toutes les entrées de la table génèrent false, alors le problème n'est
 	 pas satisfaisable.
+
+	 Notez que l'implantation actuelle ne peut pas détecter si le problème proposé contient des variables inessentielles.
+
+	 TODO:
+
+	 - Détection des variables inessentielles
+	 - Compter véritablement les variables distinctes dans le problème
+	 - Interface permettant de définir facilement un problème
  *)
 
 
@@ -154,6 +162,14 @@ let max_var_in_probleme_sat (p: probleme_sat) : int =
 *)
 let est_satisfaisable (p: probleme_sat) : bool = 
 	List.exists (fun e -> eval_probleme_sat p e) (generer_instances_pour_n_variables (max_var_in_probleme_sat p)) ;;
+
+(**
+	probleme_sat_solutions : probleme_sat -> instance_variables list
+	Retourne une liste des réalisations de variables pour lesquelles une forme conjonctive évalue à vrai.  Si la forme est
+	non-satisfaisable, la liste sera vide.
+*)
+let probleme_sat_solutions (p: probleme_sat) : instance_variables list = 
+	List.filter (fun e -> eval_probleme_sat p e) (generer_instances_pour_n_variables (max_var_in_probleme_sat p)) ;;
 
 
 

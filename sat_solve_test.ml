@@ -38,3 +38,5 @@ assert ((max_var_in_probleme_sat probleme_sat_test_1) = 4) ;;
 
 assert( not(est_satisfaisable probleme_sat_test_1)) ;;
 assert( est_satisfaisable probleme_sat_test_2 ) ;;
+
+probleme_sat_solutions probleme_sat_test_2 ;;
